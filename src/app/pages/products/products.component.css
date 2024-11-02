@@ -1,0 +1,49 @@
+.card {
+    height: 350px;
+    margin: 20px 10px;
+    position: relative;
+    border: 2px solid #001F3F;
+}
+
+.card-body {
+    padding: 10px 15px;
+    background-color: #001f3f19;
+}
+
+.card-img-top {
+    height: 200px;
+    object-fit: cover;
+    border-bottom: #001F3F 1px solid;
+}
+
+.category-badge {
+    position: absolute;
+    right: -15px;
+    top: -15px;
+    font-size: 14px;
+    color: #ffffff;
+    font-weight: bold;
+    padding: 5px;
+    width: 150px;
+    border-radius: 10px;
+    background: #001F3F;
+    text-align: center;
+}
+
+.btn-add-cart {
+    color: #001F3F;
+    background-color: white;
+    border: 2px solid #001F3F;
+    padding: 5px;
+    width: 252px;
+    border-radius: 8px;
+    text-transform: uppercase;
+    font-weight: bold;
+    transition: all 0.3s ease;
+}
+
+.btn-add-cart:hover{
+    color: #fff;
+    background-color: #001F3F;
+    border: 2px solid #001F3F;
+}

@@ -1,0 +1,17 @@
+<div class="container">
+    <div class="row mt-4">
+        @for (product of productList(); track $index) {
+        <div class="col-3">
+            <div class="card border-2">
+                <img class="card-img-top" [src]="product.productImageUrl" alt="">
+                <span class="category-badge">{{product.categoryName}}</span>
+                <div class="card-body">
+                    <h5 class="card-title">{{product.productName | titlecase}}</h5>
+                    <p class="product-price">{{product.productPrice | currency:'INR'}}</p>
+                    <button class="btn-add-cart">Add Cart</button>
+                </div>
+            </div>
+        </div>
+        }
+    </div>
+</div>
