@@ -1,19 +1,25 @@
 .card {
     height: 350px;
-    margin: 20px 10px;
+    margin: 20px 5px;
     position: relative;
-    border: 2px solid #001F3F;
+    border: 2px solid #254336;
+    cursor: pointer;
+    transition: all 0.3s ease;
+}
+
+.card:hover{
+    transform: scale(1.05);
+    box-shadow: rgba(0, 0, 0, 0.12) 0px 2px 4px 0px, rgba(0, 0, 0, 0.32) 0px 2px 16px 0px;
 }
 
 .card-body {
     padding: 10px 15px;
-    background-color: #001f3f19;
+    background-color: #25433612;
 }
 
 .card-img-top {
     height: 200px;
     object-fit: cover;
-    border-bottom: #001F3F 1px solid;
 }
 
 .category-badge {
@@ -26,16 +32,21 @@
     padding: 5px;
     width: 150px;
     border-radius: 10px;
-    background: #001F3F;
+    background: #254336;
     text-align: center;
 }
 
+.product-price{
+    font-weight: bold;
+    color: #000;
+}
+
 .btn-add-cart {
-    color: #001F3F;
+    color: #254336;
     background-color: white;
-    border: 2px solid #001F3F;
+    border: 2px solid #254336;
     padding: 5px;
-    width: 252px;
+    width: 100%;
     border-radius: 8px;
     text-transform: uppercase;
     font-weight: bold;
@@ -44,6 +55,24 @@
 
 .btn-add-cart:hover{
     color: #fff;
-    background-color: #001F3F;
-    border: 2px solid #001F3F;
+    background-color: #254336;
+    border: 2px solid #254336;
+}
+
+.btn-category{
+    color: #fff;
+    background-color: #254336;
+    border: 2px solid #254336;
+    padding: 5px;
+    width: 100%;
+    border-radius: 8px;
+    font-weight: bold;
+    transition: all 0.3s ease;
+    margin: 10px;
+}
+
+.btn-category:hover{
+    color: #254336;
+    background-color: #ffffff;
+    border: 2px solid #254336;
 }

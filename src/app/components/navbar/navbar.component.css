@@ -1,3 +1,15 @@
+.navbar{
+    background-color: #254336;
+}
+
+.active{
+    color: #ffffff !important;
+}
+
+.nav-link{
+    color: #739788;
+}
+
 .fa-cart-shopping, .navbar-brand, .fa-truck-fast{
-    color: #001F3F;
+    color: #ffffff;
 }
