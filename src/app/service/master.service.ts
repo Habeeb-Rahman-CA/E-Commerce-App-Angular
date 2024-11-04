@@ -1,7 +1,7 @@
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { Observable } from 'rxjs';
-import { APIResponse } from '../model/interface/product';
+import { APIResponse, ICustomer, IUser } from '../model/interface/product';
 
 @Injectable({
   providedIn: 'root'
@@ -23,5 +23,15 @@ export class MasterService {
   GetAllProductsByCategoryId(categoryId: number): Observable<APIResponse> {
     const url = `${this.apiUrl}GetAllProductsByCategoryId?id=${categoryId}`
     return this.http.get<APIResponse>(url)
+  }
+
+  registerNewCustomer(obj: ICustomer): Observable<APIResponse> {
+    const url = `${this.apiUrl}RegisterCustomer`
+    return this.http.post<APIResponse>(url, obj)
+  }
+
+  loginUser(obj: IUser): Observable<APIResponse>{
+    const url = `${this.apiUrl}Login`
+    return this.http.post<APIResponse>(url, obj)
   }
 }
