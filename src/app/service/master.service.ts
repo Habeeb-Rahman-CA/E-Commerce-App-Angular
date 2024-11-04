@@ -12,11 +12,16 @@ export class MasterService {
 
   apiUrl: string = 'https://freeapi.miniprojectideas.com/api/BigBasket/'
 
-  getAllProducts(): Observable<APIResponse>{
+  getAllProducts(): Observable<APIResponse> {
     return this.http.get<APIResponse>(this.apiUrl + 'GetAllProducts')
   }
 
-  getAllCategories():Observable<APIResponse>{
+  getAllCategories(): Observable<APIResponse> {
     return this.http.get<APIResponse>(this.apiUrl + 'GetAllCategory')
+  }
+
+  GetAllProductsByCategoryId(categoryId: number): Observable<APIResponse> {
+    const url = `${this.apiUrl}GetAllProductsByCategoryId?id=${categoryId}`
+    return this.http.get<APIResponse>(url)
   }
 }

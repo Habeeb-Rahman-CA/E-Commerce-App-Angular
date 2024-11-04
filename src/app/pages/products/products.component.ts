@@ -16,6 +16,7 @@ export class ProductsComponent implements OnInit, OnDestroy {
   masterService = inject(MasterService)
 
   productList = signal<IProduct[]>([])
+
   categoryList$: Observable<ICategory[]> = new Observable<ICategory[]>()
 
   subscriptionList: Subscription[] = []
@@ -32,6 +33,13 @@ export class ProductsComponent implements OnInit, OnDestroy {
       this.productList.set(res.data)
     }))
   }
+
+  getProductByCategory(id: number){
+    this.subscriptionList.push(this.masterService.GetAllProductsByCategoryId(id).subscribe((res: APIResponse) => {
+      this.productList.set(res.data)
+    }))
+  }
+
   //if we subscribe we also want to unsubsribe it
   ngOnDestroy(): void {
     this.subscriptionList.forEach(element => {

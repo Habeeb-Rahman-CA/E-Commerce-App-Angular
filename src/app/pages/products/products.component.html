@@ -2,7 +2,7 @@
     <div class="row mt-4">
         <div class="col-2 mt-2">
             @for (category of categoryList$ |async; track $index) {
-                <button class="btn-category">{{category.categoryName}}</button>
+                <button class="btn-category" (click)="getProductByCategory(category.categoryId)">{{category.categoryName}}</button>
             }
         </div>
         <div class="col-10">
