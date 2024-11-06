@@ -1,6 +1,6 @@
 import { Component, inject, OnDestroy, OnInit, signal } from '@angular/core';
 import { MasterService } from '../../service/master.service';
-import { APIResponse, ICategory, IProduct } from '../../model/interface/product';
+import { APIResponse, ICart, ICategory, ICustomer, IProduct } from '../../model/interface/product';
 import { CommonModule } from '@angular/common';
 import { map, Observable, Subscription } from 'rxjs';
 
@@ -21,6 +21,16 @@ export class ProductsComponent implements OnInit, OnDestroy {
 
   subscriptionList: Subscription[] = []
 
+  loggedUserData: ICustomer = new ICustomer()
+
+  constructor(){
+    const isUser = localStorage.getItem('token')
+    if (isUser != null) {
+      const parseObj = JSON.parse(isUser)
+      this.loggedUserData = parseObj
+    }
+  }
+
   ngOnInit(): void {
     this.getAllProduct()
     this.categoryList$ = this.masterService.getAllCategories().pipe(
@@ -38,6 +48,19 @@ export class ProductsComponent implements OnInit, OnDestroy {
     this.subscriptionList.push(this.masterService.GetAllProductsByCategoryId(id).subscribe((res: APIResponse) => {
       this.productList.set(res.data)
     }))
+  }
+
+  onAddToCart(id: number){
+    const newObj: ICart = new ICart()
+    newObj.productId = id
+    newObj.custId = this.loggedUserData.custId
+    this.masterService.addToCart(newObj).subscribe((res:APIResponse) =>{
+      if (res.result) {
+        alert("Product Added to Cart")
+      } else {
+        alert(res.message)
+      }
+    })
   }
 
   //if we subscribe we also want to unsubsribe it

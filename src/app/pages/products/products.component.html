@@ -15,7 +15,7 @@
                         <div class="card-body">
                             <h5 class="card-title">{{product.productName | titlecase}}</h5>
                             <p class="product-price">{{product.productPrice | currency:'INR'}}</p>
-                            <button class="btn-add-cart">Add Cart</button>
+                            <button class="btn-add-cart" (click)="onAddToCart(product.productId)">Add Cart</button>
                         </div>
                     </div>
                 </div>

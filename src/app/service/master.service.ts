@@ -1,7 +1,7 @@
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { Observable } from 'rxjs';
-import { APIResponse, ICustomer, IUser } from '../model/interface/product';
+import { APIResponse, ICart, ICustomer, IUser } from '../model/interface/product';
 
 @Injectable({
   providedIn: 'root'
@@ -32,6 +32,11 @@ export class MasterService {
 
   loginUser(obj: IUser): Observable<APIResponse>{
     const url = `${this.apiUrl}Login`
+    return this.http.post<APIResponse>(url, obj)
+  }
+
+  addToCart(obj: ICart): Observable<APIResponse>{
+    const url = `${this.apiUrl}AddToCart`
     return this.http.post<APIResponse>(url, obj)
   }
 }

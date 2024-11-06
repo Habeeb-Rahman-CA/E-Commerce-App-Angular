@@ -26,16 +26,16 @@ export interface ICategory {
 }
 
 export class ICustomer {
-    CustId: number;
+    custId: number;
     name: string;
-    MobileNo: string;
-    Password: string
+    mobileNo: string;
+    password: string
 
     constructor() {
-        this.CustId = 0
+        this.custId = 0
         this.name = ''
-        this.MobileNo = ''
-        this.Password = ''
+        this.mobileNo = ''
+        this.password = ''
     }
 }
 
@@ -48,3 +48,19 @@ export class IUser{
         this.UserPassword = ''
     }
 }
+
+export class ICart {
+    cartId: number;
+    custId: number;
+    productId: number;
+    quantity: number;
+    addedDate: Date;
+
+    constructor(){
+        this.cartId = 0
+        this.custId = 0
+        this.productId = 0
+        this.quantity = 1
+        this.addedDate = new Date()
+    }
+  }
