@@ -27,13 +27,13 @@ export interface ICategory {
 
 export class ICustomer {
     CustId: number;
-    Name: string;
+    name: string;
     MobileNo: string;
     Password: string
 
     constructor() {
         this.CustId = 0
-        this.Name = ''
+        this.name = ''
         this.MobileNo = ''
         this.Password = ''
     }

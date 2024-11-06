@@ -1,4 +1,4 @@
-import { Component, ElementRef, inject, ViewChild } from '@angular/core';
+import { Component, ElementRef, inject, OnInit, ViewChild } from '@angular/core';
 import { RouterOutlet } from '@angular/router';
 import { APIResponse, ICustomer, IUser } from './model/interface/product';
 import { FormsModule } from '@angular/forms';
@@ -11,16 +11,26 @@ import { MasterService } from './service/master.service';
   templateUrl: './app.component.html',
   styleUrl: './app.component.css'
 })
-export class AppComponent {
+export class AppComponent implements OnInit {
+
   title = 'e-commerce-app';
 
   registerObj: ICustomer = new ICustomer()
   loginObj: IUser = new IUser()
+  loggedUserData: ICustomer = new ICustomer()
 
   masterService = inject(MasterService)
 
   @ViewChild('registerModal') registerModal: ElementRef | undefined
   @ViewChild('loginModal') loginModal: ElementRef | undefined
+
+  ngOnInit(): void {
+    const isUser = localStorage.getItem('token')
+    if (isUser != null) {
+      const parseObj = JSON.parse(isUser)
+      this.loggedUserData = parseObj
+    }
+  }
 
   openRegisterModal() {
     if (this.registerModal)
@@ -57,11 +67,17 @@ export class AppComponent {
     this.masterService.loginUser(this.loginObj).subscribe((res: APIResponse) => {
       if (res.data) {
         alert('User login successful!')
+        this.loggedUserData = res.data
         localStorage.setItem('token', JSON.stringify(res.data))
         this.closeLoginModal()
       } else {
-        alert(res.data)
+        alert("login error")
       }
     })
+  }
+
+  logout(){
+    localStorage.removeItem('token')
+    this.loggedUserData = new ICustomer()
   }
 }
