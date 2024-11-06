@@ -1,92 +1,129 @@
 <nav class="navbar navbar-expand-lg">
-    <div class="container-fluid">
-        <a class="navbar-brand fs-2 fw-bolder py-2 px-4" href="#">
-            <i class="fa-solid fa-truck-fast"></i> SnapCart</a>
-        <div class="collapse navbar-collapse" id="navbarNavDropdown">
-            <ul class="navbar-nav">
-                <li class="nav-item px-3 fw-bold">
-                    <a class="nav-link active text-uppercase" aria-current="page" href="#">Home</a>
-                </li>
-                <li class="nav-item px-3 fw-bold">
-                    <a class="nav-link text-uppercase" href="#">Features</a>
-                </li>
-                <li class="nav-item px-3 fw-bold">
-                    <a class="nav-link text-uppercase" href="#">Pricing</a>
-                </li>
-                <li class="nav-item px-3 fw-bold">
-                    <a href="" class="nav-link text-uppercase"> 
-                        <i class="fa-solid fa-user fs-5 px-1"></i>
-                        <i class="fa-solid fa-caret-down"></i>
-                    </a>
-                </li>
-            </ul>
-        </div>
-        @if (loggedUserData.CustId == 0) {
-          <button class="btn btn-light mx-2 fw-bold" (click)="openLoginModal()">Login</button>
-          <button class="btn btn-light mx-2 fw-bold" (click)="openRegisterModal()">Register</button>
-        } @else {
-          <button class="btn btn-outline-dark mx-2 fw-bold">{{loggedUserData.name}}</button>
-          <button class="btn btn-outline-danger mx-2 fw-bold" (click)="logout()">Logout</button>
-        }
-        
-        <i class="fa-solid fa-cart-shopping fs-4 px-4"></i>
+  <div class="container-fluid">
+    <a class="navbar-brand fs-2 fw-bolder py-2 px-4" href="#">
+      <i class="fa-solid fa-truck-fast"></i> SnapCart</a>
+    <div class="collapse navbar-collapse" id="navbarNavDropdown">
+      <ul class="navbar-nav">
+        <li class="nav-item px-3 fw-bold">
+          <a class="nav-link active text-uppercase" aria-current="page" href="#">Home</a>
+        </li>
+        <li class="nav-item px-3 fw-bold">
+          <a class="nav-link text-uppercase" href="#">Features</a>
+        </li>
+        <li class="nav-item px-3 fw-bold">
+          <a class="nav-link text-uppercase" href="#">Pricing</a>
+        </li>
+        <li class="nav-item px-3 fw-bold">
+          <a href="" class="nav-link text-uppercase">
+            <i class="fa-solid fa-user fs-5 px-1"></i>
+            <i class="fa-solid fa-caret-down"></i>
+          </a>
+        </li>
+      </ul>
     </div>
+    @if (loggedUserData.custId == 0) {
+    <button class="btn btn-light mx-2 fw-bold" (click)="openLoginModal()">Login</button>
+    <button class="btn btn-light mx-2 fw-bold" (click)="openRegisterModal()">Register</button>
+    } @else {
+    <button class="btn btn-outline-dark mx-2 fw-bold">{{loggedUserData.name}}</button>
+    <button class="btn btn-outline-danger mx-2 fw-bold" (click)="logout()">Logout</button>
+    }
+
+    <i class="fa-solid fa-cart-shopping fs-4 px-4" style="cursor: pointer;" (click)="showCart()"></i>
+    <div [className]="isCartPopupOpen ? 'dropdown-menu dropdown-menu-end show':'dropdown-menu dropdown-menu-end hide'" style="position: absolute; right: 13px; top: 90px; padding: 10px;"
+      aria-labelledby="navbarDropdownMenuAvatar">
+      <div class="row">
+        <div class="col-8">
+          <h6 class="fw-bold text-uppercase">Cart Items</h6>
+        </div>
+        <div class="col-4 text-end">
+          <i class="fa fa-close text-muted fs-5" style="cursor: pointer;" (click)="showCart()"></i>
+        </div>
+      </div>
+
+      <table class="table table-sm">
+        <tbody>
+          <tr>
+            <td>
+              <div class="rounded"></div>
+            </td>
+            <td class="align-middle text-left px-3">234</td>
+            <td class="align-middle text-center px-3">567</td>
+            <td class="align-middle text-right px-3">sdrg</td>
+            <td class="align-middle text-center px-3">
+              <i class="fa fa-trash"></i>
+            </td>
+          </tr>
+          <tr>
+            <td colspan="4" class="align-middle px-3 text-right">Quantity</td>
+            <td class="align-middle text-right px-3">1</td>
+          </tr>
+          <tr>
+            <td colspan="4" class="align-middle px-3 text-right">Total</td>
+            <td class="align-middle text-right px-3">23423</td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+  </div>
 </nav>
 
 <router-outlet></router-outlet>
 
 <div class="modal" tabindex="-1" #registerModal>
-    <div class="modal-dialog">
-      <div class="modal-content">
-        <div class="modal-header">
-          <h5 class="modal-title">Register</h5>
-          <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close" (click)="closeRegisterModal()"></button>
-        </div>
-        <div class="modal-body">
-          <div class="row">
-            <div class="col-12">
-                <label for="">Name</label>
-                <input type="text" class="form-control mt-1" [(ngModel)]="registerObj.name">
-            </div>
-            <div class="col-12">
-                <label class="mt-2" for="">Mobile Number</label>
-                <input type="text" class="form-control mt-1" [(ngModel)]="registerObj.MobileNo">
-            </div>
-            <div class="col-12">
-                <label class="mt-2" for="">Password</label>
-                <input type="text" class="form-control mt-1" [(ngModel)]="registerObj.Password">
-            </div>
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title">Register</h5>
+        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"
+          (click)="closeRegisterModal()"></button>
+      </div>
+      <div class="modal-body">
+        <div class="row">
+          <div class="col-12">
+            <label for="">Name</label>
+            <input type="text" class="form-control mt-1" [(ngModel)]="registerObj.name">
+          </div>
+          <div class="col-12">
+            <label class="mt-2" for="">Mobile Number</label>
+            <input type="text" class="form-control mt-1" [(ngModel)]="registerObj.mobileNo">
+          </div>
+          <div class="col-12">
+            <label class="mt-2" for="">Password</label>
+            <input type="text" class="form-control mt-1" [(ngModel)]="registerObj.password">
           </div>
         </div>
-        <div class="modal-footer">
-          <button type="button" class="btn btn-primary" (click)="onRegister()">Register</button>
-        </div>
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-primary" (click)="onRegister()">Register</button>
       </div>
     </div>
   </div>
+</div>
 
-  <div class="modal" tabindex="-1" #loginModal>
-    <div class="modal-dialog">
-      <div class="modal-content">
-        <div class="modal-header">
-          <h5 class="modal-title">Login</h5>
-          <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close" (click)="closeLoginModal()"></button>
-        </div>
-        <div class="modal-body">
-          <div class="row">
-            <div class="col-12">
-                <label for="">Mobile Number</label>
-                <input type="text" class="form-control mt-1" [(ngModel)]="loginObj.UserName">
-            </div>
-            <div class="col-12">
-                <label class="mt-2" for="">Password</label>
-                <input type="text" class="form-control mt-1" [(ngModel)]="loginObj.UserPassword">
-            </div>
+<div class="modal" tabindex="-1" #loginModal>
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title">Login</h5>
+        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"
+          (click)="closeLoginModal()"></button>
+      </div>
+      <div class="modal-body">
+        <div class="row">
+          <div class="col-12">
+            <label for="">Mobile Number</label>
+            <input type="text" class="form-control mt-1" [(ngModel)]="loginObj.UserName">
+          </div>
+          <div class="col-12">
+            <label class="mt-2" for="">Password</label>
+            <input type="text" class="form-control mt-1" [(ngModel)]="loginObj.UserPassword">
           </div>
         </div>
-        <div class="modal-footer">
-          <button type="button" class="btn btn-primary" (click)="onLogin()">Login</button>
-        </div>
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-primary" (click)="onLogin()">Login</button>
       </div>
     </div>
   </div>
+</div>

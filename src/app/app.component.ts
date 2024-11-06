@@ -19,6 +19,8 @@ export class AppComponent implements OnInit {
   loginObj: IUser = new IUser()
   loggedUserData: ICustomer = new ICustomer()
 
+  isCartPopupOpen: boolean = false
+
   masterService = inject(MasterService)
 
   @ViewChild('registerModal') registerModal: ElementRef | undefined
@@ -79,5 +81,9 @@ export class AppComponent implements OnInit {
   logout(){
     localStorage.removeItem('token')
     this.loggedUserData = new ICustomer()
+  }
+
+  showCart(){
+    this.isCartPopupOpen = !this.isCartPopupOpen
   }
 }
