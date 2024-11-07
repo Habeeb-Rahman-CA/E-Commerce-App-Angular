@@ -21,14 +21,8 @@ export class ProductsComponent implements OnInit, OnDestroy {
 
   subscriptionList: Subscription[] = []
 
-  loggedUserData: ICustomer = new ICustomer()
-
   constructor(){
-    const isUser = localStorage.getItem('token')
-    if (isUser != null) {
-      const parseObj = JSON.parse(isUser)
-      this.loggedUserData = parseObj
-    }
+    this.masterService.loggedUserData
   }
 
   ngOnInit(): void {
@@ -53,7 +47,7 @@ export class ProductsComponent implements OnInit, OnDestroy {
   onAddToCart(id: number){
     const newObj: ICart = new ICart()
     newObj.productId = id
-    newObj.custId = this.loggedUserData.custId
+    newObj.custId = this.masterService.loggedUserData.custId
     this.masterService.addToCart(newObj).subscribe((res:APIResponse) =>{
       if (res.result) {
         this.masterService.onCartAdded.next(true)

@@ -1,0 +1,20 @@
+.img-fluid{
+    width: 100px;
+    height: 100px;
+    object-fit: cover;
+}
+
+.btn-placeorder{
+    background-color: #254336;
+    color: white;
+    font-weight: 600;
+    text-transform: uppercase;
+    border: #254336 2px solid;
+    transition: all 0.3s ease;
+}
+
+.btn-placeorder:hover{
+    background-color: white;
+    color: #254336;
+    border: #254336 2px solid;
+}

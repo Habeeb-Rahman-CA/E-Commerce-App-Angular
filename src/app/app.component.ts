@@ -23,6 +23,9 @@ export class AppComponent implements OnInit {
 
   isCartPopupOpen: boolean = false
 
+  totalPrice: number = 0
+  totalQuantity:number = 0
+
   masterService = inject(MasterService)
 
   @ViewChild('registerModal') registerModal: ElementRef | undefined
@@ -98,6 +101,8 @@ export class AppComponent implements OnInit {
   getCartItems(){
     this.masterService.getCartProductByCustomerId(this.loggedUserData.custId).subscribe((res:APIResponse) =>{
       this.userCartData = res.data
+      this.totalPrice = this.userCartData.reduce((total, item) => total + item.productPrice, 0)
+      this.totalQuantity = this.userCartData.reduce((total, item) => total + item.quantity, 0)
     })
   }
 
