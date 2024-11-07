@@ -1,6 +1,6 @@
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
-import { Observable } from 'rxjs';
+import { Observable, Subject } from 'rxjs';
 import { APIResponse, ICart, ICustomer, IUser } from '../model/interface/product';
 
 @Injectable({
@@ -11,6 +11,7 @@ export class MasterService {
   constructor(private http: HttpClient) { }
 
   apiUrl: string = 'https://freeapi.miniprojectideas.com/api/BigBasket/'
+  onCartAdded: Subject<boolean> = new Subject<boolean>()
 
   getAllProducts(): Observable<APIResponse> {
     return this.http.get<APIResponse>(this.apiUrl + 'GetAllProducts')
@@ -38,5 +39,15 @@ export class MasterService {
   addToCart(obj: ICart): Observable<APIResponse>{
     const url = `${this.apiUrl}AddToCart`
     return this.http.post<APIResponse>(url, obj)
+  }
+
+  getCartProductByCustomerId(loggedUserId: number): Observable<APIResponse>{
+    const url = `${this.apiUrl}GetCartProductsByCustomerId?id=${loggedUserId}`
+    return this.http.get<APIResponse>(url)
+  }
+
+  deleteProductFromCartById(cartItemId: number): Observable<APIResponse>{
+    const url = `${this.apiUrl}DeleteProductFromCartById?id=${cartItemId}`
+    return this.http.get<APIResponse>(url)
   }
 }

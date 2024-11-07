@@ -56,7 +56,7 @@ export class ProductsComponent implements OnInit, OnDestroy {
     newObj.custId = this.loggedUserData.custId
     this.masterService.addToCart(newObj).subscribe((res:APIResponse) =>{
       if (res.result) {
-        alert("Product Added to Cart")
+        this.masterService.onCartAdded.next(true)
       } else {
         alert(res.message)
       }

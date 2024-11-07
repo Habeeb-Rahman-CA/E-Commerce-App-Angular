@@ -5,13 +5,13 @@
     <div class="collapse navbar-collapse" id="navbarNavDropdown">
       <ul class="navbar-nav">
         <li class="nav-item px-3 fw-bold">
-          <a class="nav-link active text-uppercase" aria-current="page" href="#">Home</a>
+          <a class="nav-link text-uppercase" routerLink="home">Home</a>
         </li>
         <li class="nav-item px-3 fw-bold">
-          <a class="nav-link text-uppercase" href="#">Features</a>
+          <a class="nav-link text-uppercase" routerLink="my-order">My Order</a>
         </li>
         <li class="nav-item px-3 fw-bold">
-          <a class="nav-link text-uppercase" href="#">Pricing</a>
+          <a class="nav-link text-uppercase" routerLink="create-order">Pricing</a>
         </li>
         <li class="nav-item px-3 fw-bold">
           <a href="" class="nav-link text-uppercase">
@@ -30,40 +30,56 @@
     }
 
     <i class="fa-solid fa-cart-shopping fs-4 px-4" style="cursor: pointer;" (click)="showCart()"></i>
-    <div [className]="isCartPopupOpen ? 'dropdown-menu dropdown-menu-end show':'dropdown-menu dropdown-menu-end hide'" style="position: absolute; right: 13px; top: 90px; padding: 10px;"
-      aria-labelledby="navbarDropdownMenuAvatar">
-      <div class="row">
+    <div [className]="isCartPopupOpen ? 'dropdown-menu dropdown-menu-end show':'dropdown-menu dropdown-menu-end hide'"
+      style="position: absolute; right: 13px; top: 90px; padding: 10px;" aria-labelledby="navbarDropdownMenuAvatar">
+      <div class="row p-1">
         <div class="col-8">
-          <h6 class="fw-bold text-uppercase">Cart Items</h6>
+          <h6 class="cart-head fw-bolder text-uppercase text-center rounded-4 p-2">Cart Items</h6>
         </div>
         <div class="col-4 text-end">
-          <i class="fa fa-close text-muted fs-5" style="cursor: pointer;" (click)="showCart()"></i>
+          <i class="fa fa-close text-muted fs-5 p-2" style="cursor: pointer;" (click)="showCart()"></i>
         </div>
       </div>
 
-      <table class="table table-sm">
+      <table class="table table-sm cart-table">
+        <thead class="fw-bold text-center">
+          <tr>
+            <td>Product</td>
+            <td></td>
+            <td>Quantity</td>
+            <td>Price</td>
+            <td></td>
+          </tr>
+        </thead>
         <tbody>
-          <tr>
-            <td>
-              <div class="rounded"></div>
-            </td>
-            <td class="align-middle text-left px-3">234</td>
-            <td class="align-middle text-center px-3">567</td>
-            <td class="align-middle text-right px-3">sdrg</td>
-            <td class="align-middle text-center px-3">
-              <i class="fa fa-trash"></i>
-            </td>
+          @for (item of userCartData; track $index) {
+            <tr>
+              <td>
+                <div class="rounded" style="background-image: url({{item.productImageUrl}}); width: 60px; height: 60px; background-size: cover;"></div>
+              </td>
+              <td class="align-middle text-start px-3">{{item.productName | titlecase}}</td>
+              <td class="align-middle text-center px-3">{{item.quantity}}</td>
+              <td class="align-middle text-end px-3">{{item.productPrice | currency: "INR"}}</td>
+              <td class="align-middle text-center px-3">
+                <i class="fa fa-trash text-danger opacity-75" style="cursor: pointer;" (click)="onRemoveCartItem(item.cartId)"></i>
+              </td>
+            </tr>  
+          }
+          <tr class="px-2">
+            <td colspan="3" class="align-middle px-3 fw-bold text-center">Total Quantity</td>
+            <td class="align-middle text-end px-3">1</td>
           </tr>
           <tr>
-            <td colspan="4" class="align-middle px-3 text-right">Quantity</td>
-            <td class="align-middle text-right px-3">1</td>
-          </tr>
-          <tr>
-            <td colspan="4" class="align-middle px-3 text-right">Total</td>
-            <td class="align-middle text-right px-3">23423</td>
+            <td colspan="3" class="align-middle px-3 fw-bold text-center">Total</td>
+            <td class="align-middle text-end px-3">23423</td>
           </tr>
         </tbody>
       </table>
+      <div class="row">
+        <div class="col-12 text-center">
+          <button class="btn btn-checkout" routerLink="create-order" (click)="showCart()">Checkout</button>
+        </div>
+      </div>
     </div>
   </div>
 </nav>

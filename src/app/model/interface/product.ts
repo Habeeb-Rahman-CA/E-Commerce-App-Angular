@@ -39,13 +39,13 @@ export class ICustomer {
     }
 }
 
-export class IUser{
+export class IUser {
     UserName: string;
     UserPassword: string
 
-    constructor(){
+    constructor() {
         this.UserName = '',
-        this.UserPassword = ''
+            this.UserPassword = ''
     }
 }
 
@@ -56,11 +56,39 @@ export class ICart {
     quantity: number;
     addedDate: Date;
 
-    constructor(){
+    constructor() {
         this.cartId = 0
         this.custId = 0
         this.productId = 0
         this.quantity = 1
         this.addedDate = new Date()
     }
+}
+
+export interface IUserCart {
+    cartId: number;
+    custId: number;
+    productId: number;
+    quantity: number;
+    productShortName: string;
+    addedDate: string;
+    productName: string;
+    categoryName: string;
+    productImageUrl: string;
+    productPrice: number;
+}
+
+export interface IPlaceOrder {
+    SaleId: number;
+    CustId: number;
+    SaleDate: string;
+    TotalInvoiceAmount: number;
+    Discount: number;
+    PaymentNaration: string;
+    DeliveryAddress1: string;
+    DeliveryAddress2: string;
+    DeliveryCity: string;
+    DeliveryPinCode: string;
+    DeliveryLandMark: string;
+    IsCanceled: boolean;
   }

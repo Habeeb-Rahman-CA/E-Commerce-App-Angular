@@ -1,13 +1,14 @@
 import { Component, ElementRef, inject, OnInit, ViewChild } from '@angular/core';
-import { RouterOutlet } from '@angular/router';
-import { APIResponse, ICustomer, IUser } from './model/interface/product';
+import { RouterModule, RouterOutlet } from '@angular/router';
+import { APIResponse, ICustomer, IUser, IUserCart } from './model/interface/product';
 import { FormsModule } from '@angular/forms';
 import { MasterService } from './service/master.service';
+import { CommonModule } from '@angular/common';
 
 @Component({
   selector: 'app-root',
   standalone: true,
-  imports: [RouterOutlet, FormsModule],
+  imports: [RouterOutlet, FormsModule, CommonModule, RouterModule],
   templateUrl: './app.component.html',
   styleUrl: './app.component.css'
 })
@@ -18,6 +19,7 @@ export class AppComponent implements OnInit {
   registerObj: ICustomer = new ICustomer()
   loginObj: IUser = new IUser()
   loggedUserData: ICustomer = new ICustomer()
+  userCartData:IUserCart[] = []
 
   isCartPopupOpen: boolean = false
 
@@ -31,7 +33,13 @@ export class AppComponent implements OnInit {
     if (isUser != null) {
       const parseObj = JSON.parse(isUser)
       this.loggedUserData = parseObj
+      this.getCartItems()
     }
+    this.masterService.onCartAdded.subscribe((res) =>{
+      if (res) {
+        this.getCartItems()
+      }
+    })
   }
 
   openRegisterModal() {
@@ -85,5 +93,21 @@ export class AppComponent implements OnInit {
 
   showCart(){
     this.isCartPopupOpen = !this.isCartPopupOpen
+  }
+
+  getCartItems(){
+    this.masterService.getCartProductByCustomerId(this.loggedUserData.custId).subscribe((res:APIResponse) =>{
+      this.userCartData = res.data
+    })
+  }
+
+  onRemoveCartItem(id: number){
+    this.masterService.deleteProductFromCartById(id).subscribe((res) => {
+      if (res.result) {
+        this.getCartItems()
+      } else {
+        alert(res.message)
+      }
+    })
   }
 }

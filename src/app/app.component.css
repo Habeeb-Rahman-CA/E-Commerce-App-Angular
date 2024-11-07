@@ -1,0 +1,27 @@
+.cart-head{
+    background-color: #2543362b !important;
+}
+.btn-checkout{
+    text-transform: uppercase;
+    font-weight: bold;
+    background-color: #254336;
+    border: #254336 2px solid;
+    color: white;
+    width: 100%;
+    transition: all 0.3s ease;
+}
+
+.fa-trash{
+    transition: all 0.3s ease;
+}
+
+.fa-trash:hover{
+    color: #ff0015 !important;
+}
+
+.btn-checkout:hover{
+    border: #254336 2px solid;
+    background-color: #ffffff;
+    color: #254336;
+    width: 100%;
+}
