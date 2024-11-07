@@ -5,28 +5,28 @@
             <form>
                 <div class="row py-2">
                     <div class="col-6">
-                        <input type="text" [(ngModel)]="orderObj.DeliveryCity" placeholder="City" class="form-control ">
+                        <input type="text" [(ngModel)]="orderObj.deliveryCity" name="deliveryCity" placeholder="City" class="form-control ">
                     </div>
                     <div class="col-6">
-                        <input type="text" [(ngModel)]="orderObj.DeliveryLandMark" placeholder="Landmark" class="form-control">
+                        <input type="text" [(ngModel)]="orderObj.deliveryLandMark" name="deliveryLandMark" placeholder="Landmark" class="form-control">
                     </div>
                 </div>
                 <div class="row py-2">
                     <div class="col-6">
-                        <input type="text" [(ngModel)]="orderObj.DeliveryAddress1" placeholder="Address" class="form-control">
+                        <input type="text" [(ngModel)]="orderObj.deliveryAddress1" name="deliveryAddress1" placeholder="City" class="form-control">
                     </div>
                     <div class="col-6">
-                        <input type="text" [(ngModel)]="orderObj.DeliveryPinCode" placeholder="Pincode" class="form-control">
+                        <input type="text" [(ngModel)]="orderObj.deliveryPinCode" name="deliveryPinCode" placeholder="Pin Code" class="form-control">
                     </div>
                 </div>
                 <div class="row py-2">
                     <div class="col-12">
-                        <textarea rows="3" type="text" [(ngModel)]="orderObj.DeliveryAddress2" placeholder="Delivery instruction" class="form-control"></textarea>
+                        <textarea rows="3" type="text" [(ngModel)]="orderObj.deliveryAddress2" name="deliveryAddress2" placeholder="Delivery Instruction" class="form-control"></textarea>
                     </div>
                 </div>
             </form>
         </div>
-        <div class="col-4 card p-3">
+        <div class="col-4 card card-order p-3">
             <h4 class="text-uppercase fw-bold bg-success text-center bg-opacity-25 p-1 rounded">Your Order</h4>
             @for (item of userCart; track $index) {
                 <div class="row border-top">
@@ -42,7 +42,7 @@
             }
             <div class="row border-top p-2 mx-1">
                 <div class="col-6 fw-bold fs-5 text-center">Total Price</div>
-                <div class="col-6 fw-bold fs-5 text-center">{{totalPrice}}</div>
+                <div class="col-6 fw-bold fs-5 text-center">{{totalPrice | currency: "INR"}}</div>
             </div>
             <div class="row border-top p-2 mx-1">
                 <button class="btn btn-placeorder w-100" (click)="placeOrder()">Place Order</button>

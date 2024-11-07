@@ -79,31 +79,31 @@ export interface IUserCart {
 }
 
 export class IPlaceOrder {
-    SaleId: number;
-    CustId: number;
-    SaleDate: Date;
-    TotalInvoiceAmount: number;
-    Discount: number;
-    PaymentNaration: string;
-    DeliveryAddress1: string;
-    DeliveryAddress2: string;
-    DeliveryCity: string;
-    DeliveryPinCode: string;
-    DeliveryLandMark: string;
-    IsCanceled: boolean;
+    saleId: number;
+    custId: number;
+    saleDate: Date;
+    totalInvoiceAmount: number;
+    discount: number;
+    paymentNaration: string;
+    deliveryAddress1: string;
+    deliveryAddress2: string;
+    deliveryCity: string;
+    deliveryPinCode: string;
+    deliveryLandMark: string;
+    isCanceled: boolean;
 
     constructor() {
-        this.SaleId = 0;
-        this.CustId = 0;
-        this.SaleDate = new Date();
-        this.TotalInvoiceAmount = 0;
-        this.Discount = 0;
-        this.PaymentNaration = '';
-        this.DeliveryAddress1 = '';
-        this.DeliveryAddress2 = '';
-        this.DeliveryCity = '';
-        this.DeliveryPinCode = '';
-        this.DeliveryLandMark = '';
-        this.IsCanceled = false;
+        this.saleId = 0;
+        this.custId = 0;
+        this.saleDate = new Date();
+        this.totalInvoiceAmount = 0;
+        this.discount = 0;
+        this.paymentNaration = '';
+        this.deliveryAddress1 = '';
+        this.deliveryAddress2 = '';
+        this.deliveryCity = '';
+        this.deliveryPinCode = '';
+        this.deliveryLandMark = '';
+        this.isCanceled = false;
     }
 }

@@ -19,7 +19,7 @@ export class CreateOrderComponent implements OnInit {
 
   masterService = inject(MasterService)
 
-  orderObj: IPlaceOrder = new IPlaceOrder
+  orderObj: IPlaceOrder = new IPlaceOrder()
 
   ngOnInit(): void {
     this.getUserCart()
@@ -33,8 +33,8 @@ export class CreateOrderComponent implements OnInit {
   }
 
   placeOrder(){
-    this.orderObj.CustId = this.masterService.loggedUserData.custId
-    this.orderObj.TotalInvoiceAmount = this.totalPrice
+    this.orderObj.custId = this.masterService.loggedUserData.custId
+    this.orderObj.totalInvoiceAmount = this.totalPrice
     this.masterService.placeOrder(this.orderObj).subscribe((res: APIResponse) =>{
       if (res.result) {
         alert('Your order placed successfully')
