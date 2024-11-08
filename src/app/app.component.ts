@@ -22,6 +22,7 @@ export class AppComponent implements OnInit {
   userCartData:IUserCart[] = []
 
   isCartPopupOpen: boolean = false
+  isUserPopupOpen: boolean = false
 
   totalPrice: number = 0
   totalQuantity:number = 0
@@ -96,6 +97,10 @@ export class AppComponent implements OnInit {
 
   showCart(){
     this.isCartPopupOpen = !this.isCartPopupOpen
+  }
+
+  showUser(){
+    this.isUserPopupOpen = !this.isUserPopupOpen
   }
 
   getCartItems(){

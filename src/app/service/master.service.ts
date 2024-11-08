@@ -64,4 +64,9 @@ export class MasterService {
     const url = `${this.apiUrl}PlaceOrder`
     return this.http.post<APIResponse>(url, obj)
   }
+
+  getAllSaleByCustomerId(loggedUserId: number): Observable<APIResponse>{
+    const url = `${this.apiUrl}GetAllSaleByCustomerId?id=${loggedUserId}`
+    return this.http.get<APIResponse>(url)
+  }
 }

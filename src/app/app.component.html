@@ -8,13 +8,38 @@
           <a class="nav-link text-uppercase" routerLink="home">Home</a>
         </li>
         <li class="nav-item px-3 fw-bold">
-          <a class="nav-link text-uppercase" routerLink="my-order">My Order</a>
+          <a class="nav-link text-uppercase" routerLink="my-order">Orders & Returns</a>
         </li>
-        <li class="nav-item px-3 fw-bold">
-          <a href="" class="nav-link text-uppercase">
+        <li class="nav-item px-3 fw-bold position-relative">
+          <a class="nav-link text-uppercase">
+            @if (loggedUserData.custId == 0) {
             <i class="fa-solid fa-user fs-5 px-1"></i>
-            <i class="fa-solid fa-caret-down"></i>
+            } @else {
+            <i class="fa-solid fa-user fs-5 px-1" (click)="showUser()"></i>
+            <button class="border-0 text-dark bg-transparent fw-bold text-muted">{{loggedUserData.name}}</button>
+            }
           </a>
+          <div
+            [className]="isUserPopupOpen ? 'dropdown-menu dropdown-menu-end show':'dropdown-menu dropdown-menu-end hide'"
+            style="position: absolute; left: 30px; top: 40px; padding: 10px; width: 230px !important;"
+            aria-labelledby="navbarDropdownMenuAvatar">
+            <div class="row pb-1">
+              <div class="col-8">
+                <div class="cart-head fw-bold text-uppercase text-center text-muted fs-6 rounded-4">User Details</div>
+              </div>
+              <div class="col-4 text-end">
+                <i class="fa fa-close text-muted fs-5" style="cursor: pointer;" (click)="showUser()"></i>
+              </div>
+            </div>
+            <div class="row pt-2">
+              <div class="col-6 text-start">Name :</div>
+              <div class="col-6 text-start">{{loggedUserData.name}}</div>
+            </div>
+            <div class="row">
+              <div class="col-6 text-start">Mobile :</div>
+              <div class="col-6 text-start">{{loggedUserData.mobileNo}}</div>
+            </div>
+          </div>
         </li>
       </ul>
     </div>
@@ -22,13 +47,12 @@
     <button class="btn btn-light mx-2 fw-bold" (click)="openLoginModal()">Login</button>
     <button class="btn btn-light mx-2 fw-bold" (click)="openRegisterModal()">Register</button>
     } @else {
-    <button class="btn btn-outline-dark mx-2 fw-bold">{{loggedUserData.name}}</button>
     <button class="btn btn-outline-danger mx-2 fw-bold" (click)="logout()">Logout</button>
     }
 
     <i class="fa-solid fa-cart-shopping fs-4 px-4" style="cursor: pointer;" (click)="showCart()"></i>
     <div [className]="isCartPopupOpen ? 'dropdown-menu dropdown-menu-end show':'dropdown-menu dropdown-menu-end hide'"
-      style="position: absolute; right: 13px; top: 90px; padding: 10px;" aria-labelledby="navbarDropdownMenuAvatar">
+      style="position: absolute; right: 13px; top: 65px; padding: 10px;" aria-labelledby="navbarDropdownMenuAvatar">
       <div class="row p-1">
         <div class="col-8">
           <h6 class="cart-head fw-bolder text-uppercase text-center rounded-4 p-2">Cart Items</h6>
@@ -50,17 +74,20 @@
         </thead>
         <tbody>
           @for (item of userCartData; track $index) {
-            <tr>
-              <td>
-                <div class="rounded" style="background-image: url({{item.productImageUrl}}); width: 60px; height: 60px; background-size: cover;"></div>
-              </td>
-              <td class="align-middle text-start px-3">{{item.productName | titlecase}}</td>
-              <td class="align-middle text-center px-3">{{item.quantity}}</td>
-              <td class="align-middle text-end px-3">{{item.productPrice | currency: "INR"}}</td>
-              <td class="align-middle text-center px-3">
-                <i class="fa fa-trash text-danger opacity-75" style="cursor: pointer;" (click)="onRemoveCartItem(item.cartId)"></i>
-              </td>
-            </tr>  
+          <tr>
+            <td>
+              <div class="rounded"
+                style="background-image: url({{item.productImageUrl}}); width: 60px; height: 60px; background-size: cover;">
+              </div>
+            </td>
+            <td class="align-middle text-start px-3">{{item.productName | titlecase}}</td>
+            <td class="align-middle text-center px-3">{{item.quantity}}</td>
+            <td class="align-middle text-end px-3">{{item.productPrice | currency: "INR"}}</td>
+            <td class="align-middle text-center px-3">
+              <i class="fa fa-trash text-danger opacity-75" style="cursor: pointer;"
+                (click)="onRemoveCartItem(item.cartId)"></i>
+            </td>
+          </tr>
           }
           <tr class="px-2">
             <td colspan="3" class="align-middle px-3 fw-bold text-center">Total Quantity</td>
