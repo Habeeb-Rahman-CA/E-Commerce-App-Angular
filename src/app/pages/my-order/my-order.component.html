@@ -1,1 +1,30 @@
-<p>my-order works!</p>
+<div class="container h-100">
+    <div class="row pt-5">
+        <div class="col-12 card p-3">
+            <h4 class="text-uppercase fw-bold bg-secondary text-center bg-opacity-25 p-1 rounded">Orders and Returns</h4>
+            <div class="row p-3">
+                
+                    <table class="table table-striped">
+                        <thead>
+                            <tr>
+                                <th>Sale ID</th>
+                                <th>Sale Date</th>
+                                <th>Address</th>
+                                <th>Total Amount</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            @for (item of salesList; track $index) {
+                            <tr>
+                                <td>{{item.saleId}}</td>
+                                <td>{{item.saleDate | date : "dd-MMM-yyyy"}}</td>
+                                <td>{{item.deliveryAddress1}}, {{item.deliveryLandMark}}, {{item.deliveryCity}}, {{item.deliveryPinCode}}</td>
+                                <td>{{item.totalInvoiceAmount | currency : "INR"}}</td>
+                            </tr>
+                            }
+                        </tbody>
+                    </table>
+            </div>
+        </div>
+    </div>
+</div>

@@ -1,0 +1,14 @@
+.btn-continue{
+    background-color: #254336;
+    color: white;
+    font-weight: 600;
+    text-transform: uppercase;
+    border: #254336 2px solid;
+    transition: all 0.3s ease;
+}
+
+.btn-continue:hover{
+    background-color: white;
+    color: #254336;
+    border: #254336 2px solid;
+}

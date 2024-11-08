@@ -3,6 +3,7 @@ import { MasterService } from '../../service/master.service';
 import { APIResponse, IPlaceOrder, IUserCart } from '../../model/interface/product';
 import { CommonModule } from '@angular/common';
 import { FormsModule } from '@angular/forms';
+import { Router, RouterModule } from '@angular/router';
 
 @Component({
   selector: 'app-create-order',
@@ -18,6 +19,7 @@ export class CreateOrderComponent implements OnInit {
   totalPrice: number = 0
 
   masterService = inject(MasterService)
+  router = inject(Router)
 
   orderObj: IPlaceOrder = new IPlaceOrder()
 
@@ -40,6 +42,7 @@ export class CreateOrderComponent implements OnInit {
         alert('Your order placed successfully')
         this.getUserCart()
         this.orderObj = new IPlaceOrder()
+        this.router.navigate(['order-success'])
       } else {
         alert(res.message)
       }
