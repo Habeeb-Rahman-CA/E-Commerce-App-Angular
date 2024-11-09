@@ -1,3 +1,13 @@
+.navbar{
+    background-color: #254336;
+}
+
+.navbar-brand{
+    color: white;
+}
+
+
+
 .cart-head{
     background-color: #2543362b !important;
 }
